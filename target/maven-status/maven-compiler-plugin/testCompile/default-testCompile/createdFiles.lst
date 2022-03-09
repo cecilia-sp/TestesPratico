@@ -1,0 +1,8 @@
+pages\PaginaInicial.class
+runner\Runner.class
+pages\BasePage.class
+dao\Queries.class
+dao\ConnectionOne.class
+driver\Driver.class
+dao\CreateEnvironment.class
+steps\CenarioUm.class
