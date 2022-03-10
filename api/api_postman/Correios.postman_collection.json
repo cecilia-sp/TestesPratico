@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "c6164677-077c-43ff-9d92-3c76c3ea7b0a",
+		"name": "Correios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Busca CEP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"// var cpf = \"3836000\"; // cep ivalido\r",
+							"var cpf = \"38360000\"; // cep unico\r",
+							"// var cpf = \"38401154\"; // todos campos falta complemento2\r",
+							"// var cpf = \"70070120 \"; // todos campos \r",
+							"// var cpf = \"30965430\"; // cep não encontrado\r",
+							"// var cpf = \"38350679\"; // cep não encontrado\r",
+							"// var cpf = \"38350679\"; // Sem nenhum retorno\r",
+							"pm.variables.set(\"cpf\", cpf);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var jsonData        = responseBody;\r",
+							"var bairro\t\t\t= responseBody.has(\"<bairro></bairro>\");\r",
+							"var cep\t\t\t\t= responseBody.has(\"<cep></cep>\");\r",
+							"var cidade\t\t\t= responseBody.has(\"<cidade></cidade>\");\r",
+							"var complemento2 \t= responseBody.has(\"<complemento2></complemento2>\");\r",
+							"var end\t\t\t\t= responseBody.has(\"<end></end>\");\r",
+							"var uf\t\t\t\t= responseBody.has(\"<uf></uf>\");\r",
+							"var cepInvalido\t\t= responseBody.has(\"CEP INVÁLIDO\");\r",
+							"var cepNaoEncontrado    = responseBody.has(\"CEP NAO ENCONTRADO\");\r",
+							"\r",
+							"\r",
+							"pm.test(\"VALIDA CEP UNICO\", function(){\r",
+							"if (pm.response.to.have.status(200) ) {\r",
+							"    pm.expect(jsonData).to.include(\"<bairro></bairro>\");\r",
+							"    pm.expect(jsonData).to.include(\"<complemento2></complemento2>\");\r",
+							"    pm.expect(jsonData).to.include(\"<end></end>\");\r",
+							"}\r",
+							"});\r",
+							"\r",
+							"pm.test(\"VALIDA CEP NÃO ENCONTRADO\", function () {\r",
+							"    pm.expect(jsonData).to.include(\"CEP NAO ENCONTRADO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"VALIDA CEP INAVALIDO\", function () {\r",
+							"    pm.expect(jsonData).to.include(\"CEP INVÁLIDO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"VALIDAÇÃO GERAL DE CEP\", function () {\r",
+							"    if (bairro == true && cep == true && cidade == true && complemento2 == true && end == true && uf == true){\r",
+							"    console.log(\"Campos Vazios\");\r",
+							"\t}\r",
+							"\t\r",
+							"\telse if (bairro == true && cep == false && cidade == false && complemento2 == true && end == true && uf == false){\r",
+							"\t\tconsole.log(\"CEP unico\");\r",
+							"\t}\r",
+							"\t\r",
+							"\telse if (bairro == false && cep == false && cidade == false && complemento2 == false && end == false && uf == true || complemento2 == true){\r",
+							"\t\tconsole.log(\"CEP com todos os campo\");    \r",
+							"\t}\r",
+							"\t\r",
+							"\telse if (cepInvalido == true){  \r",
+							"\t\tconsole.log(\"CEP INVÁLIDO\");  \r",
+							"\t}\r",
+							"\t\r",
+							"\telse if (cepNaoEncontrado == true){\r",
+							"\t\tconsole.log(\"CEP NAO ENCONTRADO\"); \r",
+							"\t}\r",
+							"\telse{\r",
+							"\t\tconsole.log(\"Sem nenhum retorno\");\t\r",
+							"\t}\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<x:Envelope\r\n    xmlns:x=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">\r\n    <x:Header/>\r\n    <x:Body>\r\n        <cli:consultaCEP>\r\n            <cep>{{cpf}}</cep>\r\n        </cli:consultaCEP>\r\n    </x:Body>\r\n</x:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "the_piece",
+			"value": ""
+		}
+	]
+}
