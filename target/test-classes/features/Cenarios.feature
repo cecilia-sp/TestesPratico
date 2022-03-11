@@ -9,7 +9,6 @@ Funcionalidade: Validar site https://advantageonlineshopping.com
 		Entao valido as especificacoes do produto
 		E fecho site
 
-
 	@ValidarCorAlterada
 	Cenario: Validar alteracao de cor do produto no carrinho
 		Dado que acesso o site

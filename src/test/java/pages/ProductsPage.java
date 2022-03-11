@@ -1,6 +1,7 @@
 package pages;
 
 import driver.Driver;
+import maps.ProductsMaps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,21 +12,20 @@ import static org.junit.Assert.assertNotEquals;
 
 public class ProductsPage extends BasePage {
     private WebDriver driver = Driver.getDriver();
-    CartPage cartPage = new CartPage();
+    ProductsMaps productsMaps = new ProductsMaps();
     Integer count = 0;
 
     public void validaEspecificacoesDoProduto() {
         wait(5);
         for (int i = 1; i <= 9; i++) {
-            String field = driver
-                    .findElement(By.xpath("//div[@class=\"roboto-light list ng-scope\"][" + i + "]//label[1]"))
-                    .getText();
-            String description = driver
-                    .findElement(By.xpath("//div[@class=\"roboto-light list ng-scope\"][" + i + "]//label[2]"))
-                    .getText();
-            field = field.replaceAll("\\s+", "_");
-            String comparation = returnDatabase(field);
-            validaAssert("Valida campo " + field, comparation, description);
+            boolean eleSelected= driver.findElement(productsMaps.fild(i)).isDisplayed();
+            if (eleSelected == true){
+                String field =  getTextElement(productsMaps.fild(i));
+                String description =  getTextElement(productsMaps.description(i));
+                field = field.replaceAll("\\s+", "_");
+                String comparator = returnDatabase(field);
+                validaAssert("Valida campo " + field, comparator, description);
+            }
         }
     }
 

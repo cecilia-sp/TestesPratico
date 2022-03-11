@@ -1,5 +1,7 @@
 package driver;
 
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -18,20 +20,10 @@ public class Driver {
 		return driver;
 	}
 
-	public static void closedDriver() {
+	public static void quitDriver() {
 		if (driver != null) {
-			driver.close();
-		}
-	}
-
-
-	public void quitDriver() {
-		if (null != driver) {
 			driver.quit();
 			driver = null;
 		}
 	}
-
-
-
 }

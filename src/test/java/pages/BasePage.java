@@ -31,6 +31,11 @@ public class BasePage {
         return retornGetTextElement;
     }
 
+    public String getTextElement(By by) {
+        wait(5);
+        return driver.findElement(by).getText();
+    }
+
     public String getTextAttribute(String getTextAttribute) {
         String retornGetTextAttribute = driver.findElement(By.xpath(getTextAttribute)).getAttribute("title");
         return retornGetTextAttribute;

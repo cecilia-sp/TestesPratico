@@ -8,7 +8,7 @@ import pages.CheckoutPage;
 import pages.HomePage;
 import pages.ProductsPage;
 
-import static driver.Driver.closedDriver;
+import static driver.Driver.quitDriver;
 
 public class CenarioUm {
 
@@ -107,7 +107,7 @@ public class CenarioUm {
 
 	@Dado("fecho site")
 	public void fecho_site() {
-		closedDriver();
+		quitDriver();
 	}
 
 }

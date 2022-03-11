@@ -20,7 +20,7 @@
 
 ### Requisitos
 - [x] Maven instalado
-- [x] Mysqul instalado
+- [x] Mysql instalado
 - [x] Postman instalado
 - [x] JDK instalado
 
@@ -59,7 +59,6 @@
 
 
 ##Informações
-
 ### Teste 1:
 - Para testar é necessário rodar a class TesteRecarga
   - Caminho: src\main\java

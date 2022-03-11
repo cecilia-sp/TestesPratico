@@ -35,10 +35,9 @@ public class CheckoutPage extends BasePage {
         colorProductCheckout = getTextElement(colorProductCheckout);
         String nameProductCheckout = "//div[@id='userCart']//a//h3[@class='ng-binding']";
         nameProductCheckout = getTextElement(nameProductCheckout);
-        System.out.println(nameProductCheckout);
         String colorProductDataBase = querys.returnInformationBankMasses("COLOR", nameProductCheckout);
         assertNotEquals("Validando cor do carrinho", colorProductDataBase, colorProductCheckout);
-        querys.updateInformation("COLOR", colorProductCheckout, nameProductCheckout);
+        querys.updateInformation("COLOR", colorProductDataBase, nameProductCheckout);
     }
 
     public void removeProduct() {
