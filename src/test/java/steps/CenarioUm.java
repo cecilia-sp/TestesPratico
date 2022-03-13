@@ -2,7 +2,6 @@ package steps;
 
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.pt.Entao;
-import org.junit.After;
 import pages.CartPage;
 import pages.CheckoutPage;
 import pages.HomePage;

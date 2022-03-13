@@ -27,7 +27,7 @@ public class Queries extends ConnectionOne {
         try {
             PreparedStatement stmt = openConnection().prepareStatement("UPDATE banco_teste_automacao.massas SET "
                     + field + " = '" + fieldChange + "' WHERE (NAME_PRODUCT = '" + product + "')");
-            stmt.executeQuery();
+            stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro de update no banco massas");
