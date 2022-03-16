@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "c6164677-077c-43ff-9d92-3c76c3ea7b0a",
+		"name": "Correios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Busca CEP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"var cep = pm.environment.get(\"cep\");\r",
+							"pm.environment.set(\"cep\", cep);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var response = xml2Json(responseBody);\r",
+							"\r",
+							"    pm.test(\"TESTE SE CAMPOS POSSUI RETORNO\", function () {\r",
+							"        if (pm.response.to.have.status(200)) {\r",
+							"            var bairro\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"bairro\"]\r",
+							"            var cep\t\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"cep\"]\r",
+							"            var cidade\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"cidade\"]\r",
+							"            var end\t\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"end\"]\r",
+							"            var uf\t\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"uf\"]\r",
+							"\r",
+							"            pm.expect(uf).to.not.equal(null);\r",
+							"            pm.expect(cep).to.not.equal(null);\r",
+							"            pm.expect(cidade).to.not.equal(null);\r",
+							"            pm.expect(bairro).to.not.equal(null);\r",
+							"            pm.expect(end).to.not.equal(null);\r",
+							"\r",
+							"        }\r",
+							"});\r",
+							"\r",
+							"    pm.test(\"TESTE CEP UNICO\", function () {\r",
+							"        if (pm.response.to.have.status(200)) {\r",
+							"            var bairro\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"bairro\"]\r",
+							"            var cep\t\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"cep\"]\r",
+							"            var cidade\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"cidade\"]\r",
+							"            var end\t\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"end\"]\r",
+							"            var uf\t\t\t\t= response[\"soap:Envelope\"][\"soap:Body\"][\"ns2:consultaCEPResponse\"][\"return\"][\"uf\"]\r",
+							"\r",
+							"            pm.expect(uf).to.not.equal(\"\");\r",
+							"            pm.expect(cep).to.not.equal(\"\");\r",
+							"            pm.expect(cidade).to.not.equal(\"\");\r",
+							"            pm.expect(bairro).to.equal(\"\");\r",
+							"            pm.expect(end).to.equal(\"\");\r",
+							"\r",
+							"        }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"TESTE CEP VALIDO\", function () {\r",
+							"       pm.expect(pm.response.text()).to.not.include(\"CEP NAO ENCONTRADO\");\r",
+							"       pm.expect(pm.response.text()).to.not.include(\"CEP INVÁLIDO\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<x:Envelope\r\n    xmlns:x=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">\r\n    <x:Header/>\r\n    <x:Body>\r\n        <cli:consultaCEP>\r\n            <cep>{{cep}}</cep>\r\n        </cli:consultaCEP>\r\n    </x:Body>\r\n</x:Envelope>",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "the_piece",
+			"value": ""
+		}
+	]
+}

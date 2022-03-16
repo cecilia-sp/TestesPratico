@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.After;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.pt.Entao;
 import pages.CartPage;
@@ -7,15 +8,19 @@ import pages.CheckoutPage;
 import pages.HomePage;
 import pages.ProductsPage;
 
+
 import static driver.Driver.quitDriver;
 
-public class CenarioUm {
-
+public class ScenariosSteps {
 	HomePage homePage = new HomePage();
 	ProductsPage productsPage = new ProductsPage();
 	CartPage cartPage = new CartPage();
 	CheckoutPage checkoutPage = new CheckoutPage();
 
+	@After
+	public void fecho_site() {
+		quitDriver();
+	}
 
 	@Dado("que acesso o site")
 	public void que_acesso_o_site() {
@@ -104,9 +109,7 @@ public class CenarioUm {
 		checkoutPage.valdateCarEmpty();
 	}
 
-	@Dado("fecho site")
-	public void fecho_site() {
-		quitDriver();
-	}
+
+
 
 }

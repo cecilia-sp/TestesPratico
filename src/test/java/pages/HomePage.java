@@ -34,7 +34,6 @@ public class HomePage extends BasePage {
 
     public void serchPage() {
         String product = querys.returnProdutdBankMasses();
-        System.out.println(product);
         String serchPage = "//*[@id='searchSection']";
         String closeSerchPage = "//*[@class='autoCompleteCover']//img";
         clickElement(serchPage);

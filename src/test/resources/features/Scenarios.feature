@@ -1,5 +1,7 @@
 #language:pt
+@TodosCenarios
 Funcionalidade: Validar site https://advantageonlineshopping.com
+
 
 	@ValidaEspecificacaoes
 	Cenario: Validar especificacoes do produto
@@ -7,7 +9,6 @@ Funcionalidade: Validar site https://advantageonlineshopping.com
 		E clico na opacao epecial Offer
 		E clico no botao  See offer
 		Entao valido as especificacoes do produto
-		E fecho site
 
 	@ValidarCorAlterada
 	Cenario: Validar alteracao de cor do produto no carrinho
@@ -18,7 +19,6 @@ Funcionalidade: Validar site https://advantageonlineshopping.com
 		E clico em Add to cart
 		Entao valido produto adicionado no carrinho
 		E valido cor seleciona no carrinho
-		E fecho site
 
 	@ValidarPaginaCheckout
 	Cenario: Validar pagina de checkout
@@ -29,7 +29,6 @@ Funcionalidade: Validar site https://advantageonlineshopping.com
 		E altero quantidade de produtos e clico Add to cart
 		Entao serei redirecionado para o checkout e valido total da compra
 		E realizo alteracao da cor do produto no banco
-		E fecho site
 
 	@ValidarCarrinhoVazio
 	Cenario: Remover produto do carrinho de compras
@@ -40,4 +39,3 @@ Funcionalidade: Validar site https://advantageonlineshopping.com
 		E clico o carrinho
 		E removo produto
 		Entao valido carrinho vazio
-		E fecho site
